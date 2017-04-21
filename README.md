@@ -2,7 +2,7 @@
 Don't like noip renewal every Month ? Just run this bash script and you have a fully functional Dynamic DNS in with CloudFlare 
 
 ## Features
-* Free Of Costs
+* Free Of Cost
 * No monthly Renewal
 * DynamicDNS using your Own domainame and CloudFlare Free account
 
