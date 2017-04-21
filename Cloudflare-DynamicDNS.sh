@@ -4,7 +4,7 @@
 ############## Add your CloudFlare Credentials Here ##############
 
 auth_email=your-login-id@gmail.com   # Your Login email id
-auth_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX # Get this from CloudFlare MySettings > Global API key Section
+api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX # Get this from CloudFlare MySettings > Global API key Section
 zone_name=example.com   # Your Website name in CloudFlare eg: example.com
 record_name=ddns           # A record name for DynamicDNS eg: ddns
 
@@ -12,9 +12,9 @@ record_name=ddns           # A record name for DynamicDNS eg: ddns
 ###################################################################
 
 identify () {
-zone_identifier=`curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=$zone_name" -H "X-Auth-Email: $auth_email" -H "X-Auth-Key: $auth_key" -H "Content-Type: application/json" | cut -d'"' -f6`
+zone_identifier=`curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=$zone_name" -H "X-Auth-Email: $auth_email" -H "X-Auth-Key: $api_key" -H "Content-Type: application/json" | cut -d'"' -f6`
 
-record_identifier=`curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records?name=$record_name.$zone_name" -H "X-Auth-Email: $auth_email" -H "X-Auth-Key: $auth_key" -H "Content-Type: application/json"  | cut -d'"' -f6`
+record_identifier=`curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records?name=$record_name.$zone_name" -H "X-Auth-Email: $auth_email" -H "X-Auth-Key: $api_key" -H "Content-Type: application/json"  | cut -d'"' -f6`
 
 if [ $record_identifier == "page" ] ; then
     echo "Zone Does not exist, Dont Worry, I will create it for you :)"
@@ -24,14 +24,14 @@ else
 fi
 
 }
-#echo $auth_email , $auth_key , $zone_name , $record_name , $zone_identifier , $record_identifier
+#echo $auth_email , $api_key , $zone_name , $record_name , $zone_identifier , $record_identifier
 
 createzone () {
-curl -X POST "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records" -H "X-Auth-Email: $auth_email" -H "X-Auth-Key: $auth_key" -H "Content-Type: application/json" --data '{"type":"A","name":"'$record_name'","content":"'$ipnow'","ttl":120,"proxied":false}'     
+curl -X POST "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records" -H "X-Auth-Email: $auth_email" -H "X-Auth-Key: $api_key" -H "Content-Type: application/json" --data '{"type":"A","name":"'$record_name'","content":"'$ipnow'","ttl":120,"proxied":false}'     
 }
 
 dnschange () {
-curl -X PUT "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records/$record_identifier" -H "X-Auth-Email: $auth_email" -H "X-Auth-Key: $auth_key" -H "Content-Type: application/json" --data '{"type":"A","name":"'$record_name'","content":"'$ipnow'","ttl":120,"proxied":false}'
+curl -X PUT "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records/$record_identifier" -H "X-Auth-Email: $auth_email" -H "X-Auth-Key: $api_key" -H "Content-Type: application/json" --data '{"type":"A","name":"'$record_name'","content":"'$ipnow'","ttl":120,"proxied":false}'
 }
 
 
