@@ -4,7 +4,7 @@
 ############## Add your CloudFlare Credentials Here ##############
 
 auth_email=your-login-id@gmail.com   # Your Login email id
-auth_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX # Get this from CloudFlare MyAccount Section
+auth_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX # Get this from CloudFlare MySettings > Global API key Section
 zone_name=example.com   # Your Website name in CloudFlare eg: example.com
 record_name=ddns           # A record name for DynamicDNS eg: ddns
 
