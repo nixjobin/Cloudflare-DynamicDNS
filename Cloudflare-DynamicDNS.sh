@@ -36,7 +36,7 @@ curl -X PUT "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_rec
 
 
 ipnow=`dig +short myip.opendns.com @resolver1.opendns.com`
-iplive=`cat /tmp/mypublicip`
+iplive=`dig +short $record_name.$zone_name @1.1.1.1`
 
 if [ "$iplive" == "$ipnow" ];then
   echo "No change in IP - Live : $iplive Now : $ipnow"
@@ -44,7 +44,7 @@ else
     echo "IP change is required from $iplive to $ipnow"
     identify
     dnschange
-    echo $ipnow > /tmp/mypublicip
+#     echo $ipnow > /tmp/mypublicip
 fi
 
 exit 0
