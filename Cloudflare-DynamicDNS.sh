@@ -14,7 +14,7 @@ record_name=ddns           # A record name for DynamicDNS eg: ddns
 identify () {
 zone_identifier=`curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=$zone_name" -H "X-Auth-Email: $cf_email" -H "X-Auth-Key: $api_key" -H "Content-Type: application/json" | cut -d'"' -f6`
 
-record_identifier=`curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records?name=$record_name.$zone_name" -H "X-Auth-Email: $cf_email" -H "X-Auth-Key: $api_key" -H "Content-Type: application/json" |grep -v zone_id |grep "id" | cut -d'"' -f4`
+record_identifier=`curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records?name=$record_name.$zone_name" -H "X-Auth-Email: $cf_email" -H "X-Auth-Key: $api_key" -H "Content-Type: application/json" |cut -d'"' -f6`
 
 if [ $record_identifier == "page" ] ; then
     echo "Zone Does not exist, Dont Worry, I will create it for you :)"
