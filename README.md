@@ -1,4 +1,4 @@
-# Cloudflare-DynamicDNS
+# Cloudflare-DynamicDNS / Cloudflare DDNS
 Don't like noip renewal every Month ? Just run this bash script and you have a fully functional Dynamic DNS in with CloudFlare 
 
 ## Features
